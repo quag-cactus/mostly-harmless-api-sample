@@ -1,0 +1,27 @@
+[project]
+name = "mostly-harmless-api-sample"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "quag-cactus", email = ""},
+]
+dependencies = [
+    "fastapi>=0.112.0",
+    "uvicorn[standard]>=0.30.5",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.dev-dependencies]
+lint = [
+    "black>=24.8.0",
+]
+
+[tool.pdm.scripts]
+dev = "python src/main.py"
+lint = "black ./"
