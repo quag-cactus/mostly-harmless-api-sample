@@ -5,7 +5,7 @@
 groups = ["default", "lint", "pytest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:6217ad26d06b9ae2ab4a11eccad70f4fe1cd29064c9b5fd9897b8e7db8e6a8af"
+content_hash = "sha256:c820a0efd19bd93aa35b95138ef1c30f70a1b6a89139d10a71fefe2a3522d0e1"
 
 [[metadata.targets]]
 requires_python = "==3.12.*"
@@ -39,6 +39,20 @@ dependencies = [
 files = [
     {file = "anyio-4.4.0-py3-none-any.whl", hash = "sha256:c1b2d8f46a8a812513012e1107cb0e68c17159a7a594208005a57dc776e1bdc7"},
     {file = "anyio-4.4.0.tar.gz", hash = "sha256:5aadc6a1bbb7cdb0bede386cac5e2940f5e2ff3aa20277e991cf028e0585ce94"},
+]
+
+[[package]]
+name = "asgi-correlation-id"
+version = "4.3.2"
+requires_python = "<4.0,>=3.8"
+summary = "Middleware correlating project logs to individual requests"
+groups = ["default"]
+dependencies = [
+    "starlette>=0.18",
+]
+files = [
+    {file = "asgi_correlation_id-4.3.2-py3-none-any.whl", hash = "sha256:82c0608b5cbe7abde1da1cbee07d9330d050b6ec179b8c8b7d6cf0ddc2aaa4da"},
+    {file = "asgi_correlation_id-4.3.2.tar.gz", hash = "sha256:84058a64b67e1ac7074177209c756f14e1e4b6958689bf2ef34f8b60a87c794f"},
 ]
 
 [[package]]

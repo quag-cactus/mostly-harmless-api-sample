@@ -1,19 +1,31 @@
-from fastapi import FastAPI
+import time
+
+from fastapi import FastAPI, Request, Header, Depends
 import uvicorn
 
 from services import quaggy_manager
 
+from asgi_correlation_id import CorrelationIdMiddleware, correlation_id
+
 app = FastAPI()
+
+app.add_middleware(CorrelationIdMiddleware)
 
 
 @app.get("/")
+async def root(user_agent: str = Header("default")):
+    return {"message": "Hello World", "request_id": correlation_id.get()}
+
+
+@app.post("/post/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Hello Posted World", "request_id": correlation_id.get()}
 
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: int):
     return {"item_id": item_id}
+
 
 @app.get("/quaggy/check_status/{quaggy_id}")
 def check_status(quaggy_id):
@@ -22,4 +34,4 @@ def check_status(quaggy_id):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8000)
+    uvicorn.run("main:app", port=8000, reload=True)
