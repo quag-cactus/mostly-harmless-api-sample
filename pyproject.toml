@@ -29,3 +29,4 @@ pytest = [
 [tool.pdm.scripts]
 dev = "python src/main.py"
 lint = "black ./"
+zip = { shell = "git archive HEAD --format zip -o ../mostly-harmless-api-sample-`git describe --tags`.zip" }
