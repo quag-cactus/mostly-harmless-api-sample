@@ -5,6 +5,7 @@ class QuaggyManager:
     def get_food(self):
         return self.food
 
+
 def check_quaggy():
     qm = QuaggyManager()
     food = qm.get_food()
