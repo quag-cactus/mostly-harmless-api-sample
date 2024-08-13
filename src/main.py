@@ -6,6 +6,10 @@ import uvicorn
 from services import quaggy_manager
 
 from asgi_correlation_id import CorrelationIdMiddleware, correlation_id
+from loguru import logger
+
+logger.add("./log/log_info.log", rotation="1MB", retention=3, level="INFO")
+logger.add("./log/log_err.log", rotation="1MB", retention=3, level="ERROR")
 
 app = FastAPI()
 
@@ -29,6 +33,7 @@ async def read_item(item_id: int):
 
 @app.get("/quaggy/check_status/{quaggy_id}")
 def check_status(quaggy_id):
+    logger.info(f"Checking status of quaggy with id: {quaggy_id}")
     s = quaggy_manager.check_quaggy_status(quaggy_id)
     return {"request_id": correlation_id.get(), "status": s}
 
