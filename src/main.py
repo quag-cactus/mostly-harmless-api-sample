@@ -3,7 +3,7 @@ import time
 from fastapi import FastAPI
 import uvicorn
 
-from services import quaggy_manager
+from src.services import quaggy_manager
 
 from asgi_correlation_id import CorrelationIdMiddleware, correlation_id
 from loguru import logger
@@ -38,5 +38,5 @@ def check_status(quaggy_id):
     return {"request_id": correlation_id.get(), "status": s}
 
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, reload=True)
+#if __name__ == "__main__":
+#    uvicorn.run("main:app", port=8000, reload=True)
