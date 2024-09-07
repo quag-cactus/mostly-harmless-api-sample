@@ -1,5 +1,6 @@
 import random
 
+from loguru import logger
 
 class QuaggyWatcher:
     def __init__(self, quaggy_id: int):
@@ -8,6 +9,8 @@ class QuaggyWatcher:
 
     def check_status(self):
         random_value = random.random()
+        logger.debug(f"value: {random_value}")
+        
         if random_value < 0.25:
             return "sleeping"
         elif random_value < 0.5:
