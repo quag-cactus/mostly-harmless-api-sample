@@ -1,12 +1,10 @@
-import time
-
 from fastapi import FastAPI
 import uvicorn
 
-from src.services import quaggy_manager
-
 from asgi_correlation_id import CorrelationIdMiddleware, correlation_id
 from loguru import logger
+from fastapi_versionizer.versionizer import Versionizer
+
 
 from src.routers import quaggy
 
@@ -34,6 +32,14 @@ async def root():
 async def read_item(item_id: int):
     return {"item_id": item_id}
 
+
+versions = Versionizer(
+    app=app,
+    prefix_format="/v{major}",
+    semantic_version_format="{major}",
+    latest_prefix="/latest",
+    sort_routes=True,
+).versionize()
 
 # if __name__ == "__main__":
 #    uvicorn.run("main:app", port=8000, reload=True)

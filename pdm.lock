@@ -5,7 +5,7 @@
 groups = ["default", "lint", "pytest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:9db3675fb4a0171236d36caab4099b3400aa9e35e360e968c398f1edbffe2257"
+content_hash = "sha256:1f28e721427b96739509cf58b419df94f6cca084d6c884bd4301122c5a3d879d"
 
 [[metadata.targets]]
 requires_python = "==3.12.*"
@@ -123,6 +123,20 @@ files = [
 ]
 
 [[package]]
+name = "fastapi-versionizer"
+version = "4.0.1"
+requires_python = ">=3.8"
+summary = "API versionizer for FastAPI web applications"
+groups = ["default"]
+dependencies = [
+    "fastapi>=0.86.0",
+    "natsort==8.*",
+]
+files = [
+    {file = "fastapi_versionizer-4.0.1.tar.gz", hash = "sha256:ced631ebefa4aa9774da3d1b77731ea6d3e622fd0d6a6544aac5928d3f1440f4"},
+]
+
+[[package]]
 name = "h11"
 version = "0.14.0"
 requires_python = ">=3.7"
@@ -200,6 +214,17 @@ groups = ["lint"]
 files = [
     {file = "mypy_extensions-1.0.0-py3-none-any.whl", hash = "sha256:4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d"},
     {file = "mypy_extensions-1.0.0.tar.gz", hash = "sha256:75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782"},
+]
+
+[[package]]
+name = "natsort"
+version = "8.4.0"
+requires_python = ">=3.7"
+summary = "Simple yet flexible natural sorting in Python."
+groups = ["default"]
+files = [
+    {file = "natsort-8.4.0-py3-none-any.whl", hash = "sha256:4732914fb471f56b5cce04d7bae6f164a592c7712e1c85f9ef585e197299521c"},
+    {file = "natsort-8.4.0.tar.gz", hash = "sha256:45312c4a0e5507593da193dedd04abb1469253b601ecaf63445ad80f0a1ea581"},
 ]
 
 [[package]]
