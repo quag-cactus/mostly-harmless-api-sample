@@ -35,6 +35,5 @@ async def read_item(item_id: int):
     return {"item_id": item_id}
 
 
-
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 #    uvicorn.run("main:app", port=8000, reload=True)
