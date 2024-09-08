@@ -17,6 +17,7 @@ def check_status(quaggy_id):
     s = quaggy_manager.check_quaggy_status(quaggy_id)
     return {"request_id": correlation_id.get(), "status": s}
 
+
 @api_version(2)
 @router.get("/get_schedule_now/{quaggy_id}")
 def get_schedule_now(quaggy_id):
