@@ -31,4 +31,5 @@ pytest = [
 [tool.pdm.scripts]
 dev = "uvicorn src.main:app --port=8000 --reload"
 lint = "black ./"
+test = "pytest tests"
 zip = { shell = "git archive HEAD --format zip -o ../mostly-harmless-api-sample-`git describe --tags`.zip" }
