@@ -2,11 +2,22 @@ import random
 import datetime
 from loguru import logger
 
+class IDDoesNotExistException(Exception):
+
+    def __init__(self, no_exists_id):
+        self.id = no_exists_id
+
+    def __str__(self):
+        return f"ID: {self.id} doss not exist"
 
 class QuaggyWatcher:
     def __init__(self, quaggy_id: int):
-        self.quaggy_id = quaggy_id
-        self.food = "apple"
+        
+        if quaggy_id < 999:
+            self.quaggy_id = quaggy_id
+        else:
+            raise IDDoesNotExistException(quaggy_id)
+        
 
     def check_status(self):
         random_value = random.random()
@@ -45,7 +56,7 @@ class QuaggyWatcher:
         return self.food
 
 
-def check_quaggy_status(quaggy_id):
+def check_quaggy_status(quaggy_id: int):
     watcher = QuaggyWatcher(quaggy_id)
     behavior = watcher.check_status()
     return f"Quaggy(ID: {quaggy_id}) is {behavior} now."
@@ -55,7 +66,11 @@ def get_quaggy_schedule(quaggy_id: int, target_time: datetime.datetime):
 
     now_time = datetime.datetime.now()
 
-    watcher = QuaggyWatcher(quaggy_id)
+    try:
+        watcher = QuaggyWatcher(quaggy_id)
+    except IDDoesNotExistException as e:
+        raise
+
     behavior = watcher.get_schedule(target_time)
 
     if behavior == "free":
