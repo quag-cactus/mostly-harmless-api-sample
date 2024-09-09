@@ -30,6 +30,9 @@ test = [
     "httpx>=0.27.2",
     "pytest-mock>=3.14.0",
 ]
+utils = [
+    "pre-commit>=3.8.0",
+]
 
 [tool.pdm.scripts]
 dev = "uvicorn src.main:app --port=8000 --reload"
