@@ -36,6 +36,7 @@ test = [
 ]
 utils = [
     "pre-commit>=3.8.0",
+    "semver>=3.0.2",
 ]
 
 [tool.pdm.scripts]
