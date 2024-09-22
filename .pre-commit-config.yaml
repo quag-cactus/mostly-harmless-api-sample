@@ -4,11 +4,10 @@ repos:
   - repo: local
     hooks:
     - id: tagbased_version_updater
-      name: TagBased_Version_Updater
+      name: tagbased-version_updater
       entry: python -m tools.auto_version_updater
       language: system
       types: [python]
-      verbose: true
   - repo: https://github.com/pdm-project/pdm
     rev: 2.17.3
     hooks:
