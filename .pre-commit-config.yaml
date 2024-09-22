@@ -3,9 +3,9 @@
 repos:
   - repo: local
     hooks:
-    - id: version_updater
-      name: Version_Updater
-      entry: python -m tools.auto_ver_uploader
+    - id: tagbased_version_updater
+      name: TagBased_Version_Updater
+      entry: python -m tools.auto_version_updater
       language: system
       types: [python]
       verbose: true

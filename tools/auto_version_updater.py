@@ -24,8 +24,7 @@ def get_lastest_sember(tags):
 
 tags = get_git_tag()
 latest_version = get_lastest_sember(tags)
-print(tags)
-print(latest_version)
+
 
 if __version__ == latest_version:
     sys.exit(0)
