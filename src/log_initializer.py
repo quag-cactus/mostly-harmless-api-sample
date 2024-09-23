@@ -65,14 +65,24 @@ def init_log(log_dir: pathlib = pathlib.Path("./log")):
         # logging.getLogger("uvicorn").handlers = [intercept_handler]
 
     logger.remove()
-    logger.add(sys.stdout, format=LOGGER_FORMAT, level="DEBUG")
-    logger.add(log_dir / "info.log", format=LOGGER_FORMAT, level="INFO")
+    logger.add(
+        sys.stdout, format=LOGGER_FORMAT, rotation="500 MB", retention=3, level="DEBUG"
+    )
+    logger.add(
+        log_dir / "info.log",
+        format=LOGGER_FORMAT,
+        rotation="500 MB",
+        retention=3,
+        level="INFO",
+    )
     logger.add(
         log_dir / "access.log",
         format=ACCESS_LOGGER_FORMAT,
+        rotation="500 MB",
+        retention=3,
         level="INFO",
         filter=lambda r: r["extra"].get("from_uvicorn_log", False),
     )
-    logger.add(log_dir / "error.log", format=LOGGER_FORMAT, level="ERROR")
+    logger.add(log_dir / "error.log", format=LOGGER_FORMAT, retention=3, level="ERROR")
 
     return
