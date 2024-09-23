@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.openapi.utils import get_openapi
 
 from asgi_correlation_id import CorrelationIdMiddleware, correlation_id
-from loguru import logger
 from fastapi_versionizer.versionizer import Versionizer
 
 from src.log_initializer import init_log
@@ -27,9 +26,6 @@ def custom_openapi():
     app.openapi_schema = openapi_schema
     return app.openapi_schema
 
-
-# logger.add("./log/log_info.log", rotation="1MB", retention=3, level="INFO")
-# logger.add("./log/log_err.log", rotation="1MB", retention=3, level="ERROR")
 
 init_log()
 
