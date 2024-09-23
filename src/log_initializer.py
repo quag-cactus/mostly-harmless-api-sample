@@ -1,18 +1,16 @@
 import logging
-from loguru import logger
 import sys
 import pathlib
 
-import asgi_correlation_id
-
-from uvicorn.config import LOGGING_CONFIG
+from loguru import logger
+from asgi_correlation_id import correlation_id
 
 
 LOGGER_FORMAT = (
     "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | "
     "<level>{level: <8}</level> | "
     "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> "
-    "<level>{message}</level>"
+    "[{correlation_id}] <level>{message}</level>"
 )
 
 ACCESS_LOGGER_FORMAT = (
@@ -23,6 +21,12 @@ ACCESS_LOGGER_FORMAT = (
 def uvicorn_filter(record):
     # ロガー名に"uvicorn"が含まれていればTrueを返す
     return record["extra"].get("from_uvicorn_log", False)
+
+
+def correlation_id_filter(record):
+    request_id = correlation_id.get()
+    record["correlation_id"] = request_id[:8] if not request_id is None else "-"
+    return True
 
 
 class InterceptHandler(logging.Handler):
@@ -66,23 +70,31 @@ def init_log(log_dir: pathlib = pathlib.Path("./log")):
 
     logger.remove()
     logger.add(
-        sys.stdout, format=LOGGER_FORMAT, rotation="500 MB", retention=3, level="DEBUG"
+        sys.stdout, format=LOGGER_FORMAT, level="DEBUG", filter=correlation_id_filter
     )
     logger.add(
         log_dir / "info.log",
         format=LOGGER_FORMAT,
-        rotation="500 MB",
+        rotation="1 MB",
         retention=3,
         level="INFO",
+        filter=correlation_id_filter,
     )
     logger.add(
         log_dir / "access.log",
         format=ACCESS_LOGGER_FORMAT,
-        rotation="500 MB",
+        rotation="1 MB",
         retention=3,
         level="INFO",
         filter=lambda r: r["extra"].get("from_uvicorn_log", False),
     )
-    logger.add(log_dir / "error.log", format=LOGGER_FORMAT, retention=3, level="ERROR")
+    logger.add(
+        log_dir / "error.log",
+        format=LOGGER_FORMAT,
+        rotation="1 MB",
+        retention=3,
+        level="ERROR",
+        filter=correlation_id_filter,
+    )
 
     return
