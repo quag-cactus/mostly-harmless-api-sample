@@ -6,6 +6,7 @@ from asgi_correlation_id import correlation_id
 from loguru import logger
 
 from src.error import IDNotFoundError
+from src.schemas.quaggy import GetScheduleNowResponse
 from src.services import quaggy_manager
 
 router = APIRouter(prefix="/quaggy", tags=["quaggy"], redirect_slashes=False)
@@ -20,7 +21,7 @@ def check_status(quaggy_id: int):
 
 
 @api_version(2)
-@router.get("/get_schedule_now/{quaggy_id}")
+@router.get("/get_schedule_now/{quaggy_id}", response_model=GetScheduleNowResponse)
 def get_schedule_now(quaggy_id: int):
     now_time = datetime.datetime.now()
 
@@ -29,4 +30,4 @@ def get_schedule_now(quaggy_id: int):
     except quaggy_manager.IDDoesNotExistException:
         raise IDNotFoundError
 
-    return {"request_id": correlation_id.get(), "status": s}
+    return GetScheduleNowResponse(request_id=correlation_id.get(), status=s)
