@@ -43,4 +43,4 @@ utils = [
 dev = "uvicorn src.main:app --port=8000 --reload"
 lint = "black ./"
 test = "pytest tests"
-zip = { shell = "git archive HEAD --format zip -o ../mostly-harmless-api-sample-`git describe --tags`.zip" }
+zip = { shell = "mkdir -p zip/ & git archive HEAD --format zip -o ./zip/mostly-harmless-api-sample-`git describe --tags`.zip" }
