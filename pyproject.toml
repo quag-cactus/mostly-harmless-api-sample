@@ -41,6 +41,7 @@ utils = [
 
 [tool.pdm.scripts]
 dev = "uvicorn src.main:app --port=8000 --reload"
+openapi = "python -m tools.openapi_exporter"
 lint = "black ./"
 test = "pytest tests"
 zip = { shell = "mkdir -p zip/ & git archive HEAD --format zip -o ./zip/mostly-harmless-api-sample-`git describe --tags`.zip" }
